@@ -6,3 +6,10 @@ Content-Type: application/json
   "surname": "Rustamov",
   "age": 34
 }
+
+### get all student
+
+GET localhost:8081/student/all
+
+### get by id
+GET  localhost:8081/student/9
