@@ -13,3 +13,23 @@ GET localhost:8081/student/all
 
 ### get by id
 GET  localhost:8081/student/9
+
+
+###get by  name and return all the data
+
+GET localhost:8081/student/by-name/Ramziddin
+
+### update
+
+PUT localhost:8081/student/update/9
+Content-Type: application/json
+
+{
+  "name": "Ramz",
+  "surname": "Rus",
+  "age": "24"
+}
+
+### delate
+
+DELETE localhost:8081/student/delete/1

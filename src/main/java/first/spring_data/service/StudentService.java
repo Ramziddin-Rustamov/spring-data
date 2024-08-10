@@ -37,12 +37,42 @@ public class StudentService {
     }
 
     public StudentDTO getById(Integer id){
-       Optional<StudentEntity> student =  studentRepository.findById(Long.valueOf(id));
+       Optional<StudentEntity> student =  studentRepository.findById(id);
        if(student.isEmpty()){
            return null;
        }
        StudentEntity entity = student.get();
        return toDTO(entity);
+    }
+
+    public List<StudentDTO> findByName(String name){
+        List<StudentEntity> students = studentRepository.findByName(name);
+        List<StudentDTO> list = new LinkedList<>();
+        for(StudentEntity data : students){
+            list.add(toDTO(data));
+        }
+        return list;
+    }
+
+    public StudentDTO update(Integer id , StudentDTO data){
+        Optional<StudentEntity> optional = studentRepository.findById(id);
+        if(optional.isEmpty()){
+            return null;
+        }
+
+        StudentEntity student = optional.get();
+        student.setName(data.getName());
+        student.setSurname(data.getSurname());
+        student.setAge(data.getAge());
+        studentRepository.save(student);
+
+        data.setId(student.getId());
+        return data;
+    }
+
+
+    public void delete(Integer id){
+       studentRepository.deleteById(id);
     }
 
     public StudentDTO toDTO(StudentEntity entity){
